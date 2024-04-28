@@ -1,0 +1,88 @@
+<div class="container">
+    <form [formGroup]="form">
+        <div class="row">
+            <!-- Name Field -->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input
+                            id="name"
+                            type="text"
+                            class="form-control"
+                            formControlName="name"
+                            placeholder="Enter your name"
+                    />
+                    <div *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+                        <small class="text-danger">Name is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                            id="email"
+                            type="email"
+                            class="form-control"
+                            formControlName="email"
+                            placeholder="Enter your email"
+                    />
+                    <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+                        <small class="text-danger">Valid email is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Field (only if userId is not set) -->
+            <div class="col-md-3" *ngIf="!userId">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                            id="password"
+                            type="password"
+                            class="form-control"
+                            formControlName="password"
+                            placeholder="Enter your password"
+                    />
+                    <div
+                            *ngIf="form.controls['password'].invalid && form.controls['password'].touched"
+                    >
+                        <small class="text-danger">Password is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confirm Password Field (only if userId is not set) -->
+            <div class="col-md-3" *ngIf="!userId">
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input
+                            id="confirmPassword"
+                            type="password"
+                            class="form-control"
+                            formControlName="confirmPassword"
+                            placeholder="Confirm your password"
+                    />
+                    <div
+                            *ngIf="form.controls['confirmPassword'].invalid && form.controls['confirmPassword'].touched"
+                    >
+                        <small class="text-danger">Passwords must match</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-success"
+                        (click)="createNewUser()"
+                        [disabled]="form.invalid">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,93 @@
+<div>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Filter Users</a>
+        </nav>
+    </div>
+
+    <form [formGroup]="formFilters">
+        <div class="row d-flex align-items-center">
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="filterName">Name</label>
+                    <input formControlName="name"
+                           type="text"
+                           class="form-control"
+                           id="filterName"
+                           placeholder="Enter name to search">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="filterEmail">Email</label>
+                    <input formControlName="email"
+                           type="text"
+                           class="form-control"
+                           id="filterEmail"
+                           placeholder="Enter email to search">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="filterActive">Active</label>
+                    <select formControlName="active"
+                           type="text"
+                           class="form-control form-select"
+                           id="filterActive">
+                        <option></option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+            </div>
+    </div>
+    </form>
+    <div class="row">
+        <div class="col-md-2" style="margin-left: 10px">
+            <button (click)="searchUsers(formFilters.value)" type="button" class="btn btn-primary" id="searchButton">Search</button>
+        </div>
+
+        <div class="col-md-2" style="margin-left: 10px">
+            <button (click)="goToCreateUser()" type="button" class="btn btn-success" id="createButton">Create New user</button>
+        </div>
+    </div>
+
+</div>
+
+<div>
+    <table>
+        <thead>
+        <th class="text-center">Action</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Created At</th>
+        <th>Active</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of grid">
+            <td>
+                <div class="dropdown">
+                    <button class="btn bg-dark text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Actions
+                    </button>
+                    <ul class="dropdown-menu pointer-cursor" aria-labelledby="dropdownMenuButton">
+                        <li *ngIf="!user.active"><a (click)="changeStatus(user.id)" class="dropdown-item">Activate User</a></li>
+                        <li *ngIf="user.active"><a (click)="changeStatus(user.id)" class="dropdown-item">Deactivate User</a></li>
+                        <li><a class="dropdown-item" (click)="goToEditUser(user.id)">Edit User</a></li>
+                        <li><a class="dropdown-item" (click)="deleteUser(user.id)">Delete User</a></li>
+                    </ul>
+                </div>
+            </td>
+            <td>{{user.name}}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+            <td class="text-center" *ngIf="user.active"><i class="bi bi-check-circle text-success"></i></td>
+            <td class="text-center" *ngIf="!user.active"><i class="bi bi-x-circle text-danger"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

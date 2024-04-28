@@ -1,0 +1,5 @@
+.left-align {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
