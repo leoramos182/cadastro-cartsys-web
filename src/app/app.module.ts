@@ -1,9 +1,21 @@
-import {NgModule} from '@angular/core';
+import {InjectionToken, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
+import {ToastrModule, ToastrService} from "ngx-toastr";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+const toastConfig = {
+  timeOut: 3000,
+  positionClass: 'toast-top-right',
+  preventDuplicates: true,
+};
+
+export const ToastConfig = new InjectionToken('ToastConfig');
+
 
 @NgModule({
   declarations: [
@@ -12,9 +24,15 @@ import {HttpClientModule} from "@angular/common/http";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,  // Default time for toast
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: ToastConfig, useValue: toastConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

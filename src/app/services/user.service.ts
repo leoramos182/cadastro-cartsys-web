@@ -17,6 +17,10 @@ export class UserService {
     return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(map(resp => resp.data));
   }
 
+  create(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}`, data).pipe(map(resp => resp));
+  }
+
   private createHttpParams(params: Params): HttpParams {
     let httpParams = new HttpParams();
     Object.keys(params).forEach((param) => {
