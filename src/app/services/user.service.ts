@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import UserFilter from "../Models/user-filter";
+import UserFilter from "../models/user-filter";
 import {AuthService} from "./auth.service";
 
 type Params = { [key: string]: any };

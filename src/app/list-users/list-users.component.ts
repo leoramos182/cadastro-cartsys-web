@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../services/user.service";
 import { Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
-import UserFilter from "../Models/user-filter";
+import UserFilter from "../models/user-filter";
 import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 
 @Component({

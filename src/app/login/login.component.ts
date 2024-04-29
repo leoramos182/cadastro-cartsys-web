@@ -33,9 +33,8 @@ export class LoginComponent {
         "Content-Type": "application/json"
       })
     }).subscribe(response => {
-        if (response && response.hasOwnProperty("token")){
-            const token = (response as any).token;
-            console.log(token)
+        if (response && response.hasOwnProperty("result")){
+            const token = (response as any).result.token;
             localStorage.setItem("jwt", token);
             this.invalidLogin = false;
             this.toastr.success("Logged In successfully");

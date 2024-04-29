@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import CreateUserCommand from "../Models/create-user-command";
+import CreateUserCommand from "../models/create-user-command";
 import {UserService} from "../services/user.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {finalize} from "rxjs";
 import {ToastrService} from "ngx-toastr";
-import UpdateUserCommand from "../Models/update-user-command";
+import UpdateUserCommand from "../models/update-user-command";
 
 @Component({
   selector: 'app-create-edit-user',

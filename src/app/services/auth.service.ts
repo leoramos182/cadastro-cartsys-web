@@ -15,7 +15,6 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     return this.http.post(this.loginUrl, { email, password }).pipe(
         tap((response: any) => {
-            console.log(response)
           const token = response.token;
           if (token) {
             localStorage.setItem(this.tokenKey, token);
@@ -30,7 +29,6 @@ export class AuthService {
           var teste = new HttpHeaders({
               "Authorization": `Bearer ${token}`, // Use "Bearer" schema for JWT
           });
-          console.log(teste)
           return teste
       }
       return new HttpHeaders();
