@@ -47,12 +47,34 @@
     </div>
     </form>
     <div class="row">
-        <div class="col-md-2" style="margin-left: 10px">
-            <button (click)="searchUsers(formFilters.value)" type="button" class="btn btn-primary" id="searchButton">Search</button>
+        <div class="col-md-2">
+            <button (click)="searchUsers(formFilters.value)"
+                    type="button"
+                    class="btn btn-primary"
+                    id="searchButton">
+                <i class="bi bi-search"></i>
+                Search
+            </button>
         </div>
 
-        <div class="col-md-2" style="margin-left: 10px">
-            <button (click)="goToCreateUser()" type="button" class="btn btn-success" id="createButton">Create New user</button>
+        <div class="col-md-2">
+            <button (click)="clearForm()"
+                    type="button"
+                    class="btn btn-warning"
+                    id="clearButton">
+                <i class="bi bi-trash3-fill"></i>
+                Clear
+            </button>
+        </div>
+
+        <div class="col-md-2">
+            <button (click)="goToCreateUser()"
+                    type="button"
+                    class="btn btn-success"
+                    id="createButton">
+                <i class="bi bi-person-fill-add"></i>
+                Create User
+                </button>
         </div>
     </div>
 
@@ -72,7 +94,7 @@
             <td>
                 <div class="dropdown">
                     <button class="btn bg-dark text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Actions
+                        <i class="bi bi-gear-fill"></i>
                     </button>
                     <ul class="dropdown-menu pointer-cursor" aria-labelledby="dropdownMenuButton">
                         <li *ngIf="!user.active"><a (click)="changeStatus(user.id)" class="dropdown-item">Activate User</a></li>

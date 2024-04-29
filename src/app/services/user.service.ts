@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import UserFilter from "../Models/user-filter";
+import {AuthService} from "./auth.service";
 
 type Params = { [key: string]: any };
 
@@ -10,16 +11,23 @@ type Params = { [key: string]: any };
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private authService: AuthService) { }
 
   private apiUrl = 'http://localhost:5167/api/users';
 
   getUser(id: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(map(resp => resp.data));
+    var headers = this.authService.getAuthHeaders();
+
+    return this.http.get<any>(`${this.apiUrl}/${id}`,
+        {headers: headers}).pipe(map(resp => resp.data));
   }
 
   getAllUsers(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`).pipe(map(resp => resp.data));
+    var headers = this.authService.getAuthHeaders();
+
+    return this.http.get<any>(`${this.apiUrl}`,
+        {headers: headers}).pipe(map(resp => resp.data));
   }
 
   create(data: any): Observable<any> {

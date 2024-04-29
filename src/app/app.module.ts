@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ToastrModule, ToastrService} from "ngx-toastr";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListUsersComponent } from './list-users/list-users.component';
@@ -12,6 +12,9 @@ import { AppHeaderComponent } from './app-header/app-header.component';
 import { HomeComponent } from './home/home.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
+import {JwtInterceptor} from "./auth/jwt.interceptor";
+import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 
 
 const toastConfig = {
@@ -30,7 +33,8 @@ export const ToastConfig = new InjectionToken('ToastConfig');
     CreateEditUserComponent,
     AppHeaderComponent,
     HomeComponent,
-    AppFooterComponent
+    AppFooterComponent,
+    LoginComponent
   ],
     imports: [
         BrowserModule,
@@ -44,7 +48,11 @@ export const ToastConfig = new InjectionToken('ToastConfig');
         BrowserAnimationsModule,
         ReactiveFormsModule
     ],
-  providers: [{ provide: ToastConfig, useValue: toastConfig }],
+  providers: [{ provide: ToastConfig, useValue: toastConfig },
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+      JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

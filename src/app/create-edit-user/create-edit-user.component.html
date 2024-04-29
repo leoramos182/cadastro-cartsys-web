@@ -76,10 +76,19 @@
 
         <!-- Submit Button -->
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-3">
+                <button class="btn btn-primary"
+                        (click)="goBack()">
+                    <i class="bi bi-arrow-left"></i>
+                    Back
+                </button>
+            </div>
+
+            <div class="col-md-3">
                 <button type="submit" class="btn btn-success"
-                        (click)="createNewUser()"
+                        (click)="createEditUser()"
                         [disabled]="form.invalid">
+                    <i class="bi bi-send"></i>
                     Submit
                 </button>
             </div>

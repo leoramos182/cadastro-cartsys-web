@@ -56,7 +56,7 @@ export class ListUsersComponent implements OnInit{
         this.userService.changeStatus(id)
             .subscribe(() => {
                 this.toastr.success('User Status Changed', 'Success');
-                this.getAllUsers();
+                this.searchUsers(this.formFilters.value);
             })
     }
 
@@ -66,6 +66,10 @@ export class ListUsersComponent implements OnInit{
                 this.toastr.success('Fetch Users by filter', 'Success');
                 this.grid = resp;
             })
+    }
+
+    clearForm(){
+        this.formFilters.reset();
     }
 
 }
