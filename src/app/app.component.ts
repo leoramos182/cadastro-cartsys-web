@@ -1,7 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from "./services/user.service";
-import User from "./models/user";
-import {ToastrService} from "ngx-toastr";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',

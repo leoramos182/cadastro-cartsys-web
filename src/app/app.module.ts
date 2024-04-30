@@ -4,18 +4,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {ToastrModule, ToastrService} from "ngx-toastr";
+import {ToastrModule} from "ngx-toastr";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ListUsersComponent } from './list-users/list-users.component';
-import { CreateEditUserComponent } from './create-edit-user/create-edit-user.component';
-import { AppHeaderComponent } from './app-header/app-header.component';
-import { HomeComponent } from './home/home.component';
-import { AppFooterComponent } from './app-footer/app-footer.component';
+import { ListUsersComponent } from './pages/list-users/list-users.component';
+import { CreateEditUserComponent } from './pages/create-edit-user/create-edit-user.component';
+import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import { LoginComponent } from './login/login.component';
-import {JwtInterceptor} from "./auth/jwt.interceptor";
+import { LoginComponent } from './pages/login/login.component';
+import {JwtInterceptor} from "./services/interceptors/jwt.interceptor";
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
-
+import {NgxPaginationModule} from "ngx-pagination";
 
 const toastConfig = {
   timeOut: 3000,
@@ -46,7 +46,8 @@ export const ToastConfig = new InjectionToken('ToastConfig');
             preventDuplicates: true,
         }),
         BrowserAnimationsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPaginationModule
     ],
   providers: [{ provide: ToastConfig, useValue: toastConfig },
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

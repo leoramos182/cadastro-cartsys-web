@@ -3,16 +3,16 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {ToastrService} from "ngx-toastr";
-import {NgForm, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
+import {ApiConfig} from "../../consts/api-config";
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
   invalidLogin?: boolean;
-  private url = 'http://localhost:5167/api/auth/';
+  private url = `${ApiConfig.BASE_URL}/auth/`;
 
   constructor(private router: Router,
               private http: HttpClient,

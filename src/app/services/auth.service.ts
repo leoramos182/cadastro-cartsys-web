@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, tap} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {ApiConfig} from "../consts/api-config";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticated: boolean = false;
-
-    private tokenKey = 'auth-token'; // Key for storing token in localStorage
-    private loginUrl = 'http://localhost:5167/login';
+    private tokenKey = 'jwt';
+    private loginUrl = `${ApiConfig.BASE_URL}/login`;
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(this.loginUrl, { email, password }).pipe(
@@ -26,17 +25,16 @@ export class AuthService {
   getAuthHeaders(): HttpHeaders {
       const token = localStorage.getItem("jwt");
       if (token) {
-          var teste = new HttpHeaders({
-              "Authorization": `Bearer ${token}`, // Use "Bearer" schema for JWT
-          });
-          return teste
+          return new HttpHeaders({
+              "Authorization": `Bearer ${token}`,
+          })
       }
       return new HttpHeaders();
   }
 
     logout(): void {
-        localStorage.removeItem(this.tokenKey); // Clear the token from storage
-        this.router.navigate(['/login']); // Redirect to login page
+        localStorage.removeItem(this.tokenKey);
+        this.router.navigate(['/login']);
     }
 
     isLoggedIn(): boolean {

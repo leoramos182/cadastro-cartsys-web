@@ -1,25 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import CreateUserCommand from "../models/create-user-command";
-import {UserService} from "../services/user.service";
+import CreateUserCommand from "../../models/create-user-command";
+import {UserService} from "../../services/user.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {finalize} from "rxjs";
 import {ToastrService} from "ngx-toastr";
-import UpdateUserCommand from "../models/update-user-command";
+import UpdateUserCommand from "../../models/update-user-command";
 
 @Component({
   selector: 'app-create-edit-user',
-  templateUrl: './create-edit-user.component.html',
-  styleUrls: ['./create-edit-user.component.css']
+  templateUrl: './create-edit-user.component.html'
 })
 export class CreateEditUserComponent implements OnInit{
 
-  userId: any;
-  command: any;
-  obs: any;
+  userId:  string | null = null;
+  command:  any;
   submitted = false;
   form: any;
+  obs: any;
 
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -38,7 +37,6 @@ export class CreateEditUserComponent implements OnInit{
       ]),
     });
 
-    // If it's a new user, add the password fields
     if (!this.userId) {
       this.form.addControl(
           'password',
@@ -72,8 +70,11 @@ export class CreateEditUserComponent implements OnInit{
     this.submitted = true
 
     if(!this.userId){
-      if(this.form.get('password')?.value !== this.form.get('confirmPassword')?.value)
+      if(this.form.get('password')?.value !== this.form.get('confirmPassword')?.value){
+        this.toastrService.error('Check Passwords Again')
         return
+      }
+
     }
 
     if (this.form.invalid)

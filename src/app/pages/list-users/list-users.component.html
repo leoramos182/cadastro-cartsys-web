@@ -1,7 +1,7 @@
 <div>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Filter Users</a>
+            <a class="navbar-brand mr-5">Filter Users</a>
         </nav>
     </div>
 
@@ -46,6 +46,7 @@
             </div>
     </div>
     </form>
+
     <div class="row">
         <div class="col-md-2">
             <button (click)="searchUsers(formFilters.value)"
@@ -83,11 +84,11 @@
 <div>
     <table>
         <thead>
-        <th class="text-center">Action</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Created At</th>
-        <th>Active</th>
+        <th class="text-center margin-right-10">Action</th>
+        <th class="margin-right-10">Name</th>
+        <th class="margin-right-10">Email</th>
+        <th class="margin-right-10">Created At</th>
+        <th class="margin-right-10">Active</th>
         </thead>
         <tbody>
         <tr *ngFor="let user of grid">

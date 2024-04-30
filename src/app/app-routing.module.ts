@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ListUsersComponent} from "./list-users/list-users.component";
-import {CreateEditUserComponent} from "./create-edit-user/create-edit-user.component";
-import {HomeComponent} from "./home/home.component";
-import {LoginComponent} from "./login/login.component";
+import {ListUsersComponent} from "./pages/list-users/list-users.component";
+import {CreateEditUserComponent} from "./pages/create-edit-user/create-edit-user.component";
+import {HomeComponent} from "./pages/home/home.component";
+import {LoginComponent} from "./pages/login/login.component";
 import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
