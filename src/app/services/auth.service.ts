@@ -11,16 +11,6 @@ export class AuthService {
     private tokenKey = 'jwt';
     private loginUrl = `${ApiConfig.BASE_URL}/login`;
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post(this.loginUrl, { email, password }).pipe(
-        tap((response: any) => {
-          const token = response.token;
-          if (token) {
-            localStorage.setItem(this.tokenKey, token);
-          }
-        })
-    );
-  }
 
   getAuthHeaders(): HttpHeaders {
       const token = localStorage.getItem("jwt");

@@ -4,6 +4,7 @@ import { Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import UserFilter from "../../models/user-filter";
 import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
+import {UserResult} from "../../models/user-result";
 
 @Component({
     selector: 'app-list-users',
@@ -12,7 +13,7 @@ import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 })
 export class ListUsersComponent implements OnInit{
 
-    grid: any[] = []
+    grid: UserResult[] = []
 
     constructor(private userService: UserService,
                 private route: Router,

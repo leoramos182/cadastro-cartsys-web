@@ -8,6 +8,7 @@ import {BaseResult} from "../models/base-result";
 import User from "../models/user";
 import CreateUserCommand from "../models/create-user-command";
 import UpdateUserCommand from "../models/update-user-command";
+import {UserResult} from "../models/user-result";
 type Params = { [key: string]: any };
 
 @Injectable({
@@ -28,9 +29,9 @@ export class UserService {
         {headers: this.headers}).pipe(map(resp => resp.data));
   }
 
-  getAllUsers(): Observable<User[]> {
+  getAllUsers(): Observable<UserResult[]> {
 
-    return this.http.get<BaseResult<User[]>>(`${this.apiUrl}`,
+    return this.http.get<BaseResult<UserResult[]>>(`${this.apiUrl}`,
         {headers: this.headers}).pipe(map(resp => resp.data));
   }
 
@@ -47,12 +48,12 @@ export class UserService {
   }
 
   changeStatus(id: string): Observable<any> {
-    return this.http.patch<User>(`${this.apiUrl}/${id}/change-status`, null, {headers: this.headers}).pipe(map(resp => resp));
+    return this.http.patch<UserResult>(`${this.apiUrl}/${id}/change-status`, null, {headers: this.headers}).pipe(map(resp => resp));
   }
 
   searchUsers(filter: UserFilter): Observable<any> {
     const queryParams = this.createHttpParams(filter);
-    return this.http.get<BaseResult<User[]>>(`${this.apiUrl}/search?`, {params: queryParams, headers: this.headers}).pipe(map(resp => resp.data));
+    return this.http.get<BaseResult<UserResult[]>>(`${this.apiUrl}/search?`, {params: queryParams, headers: this.headers}).pipe(map(resp => resp.data));
   }
 
   private createHttpParams(params: Params): HttpParams {

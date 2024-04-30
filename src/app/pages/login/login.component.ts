@@ -5,6 +5,7 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 import {ToastrService} from "ngx-toastr";
 import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {ApiConfig} from "../../consts/api-config";
+import {TokenResult} from "../../models/token-result";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import {ApiConfig} from "../../consts/api-config";
 })
 export class LoginComponent {
   invalidLogin?: boolean;
-  private url = `${ApiConfig.BASE_URL}/auth/`;
+  private url = `${ApiConfig.BASE_URL}/auth`;
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -24,17 +25,17 @@ export class LoginComponent {
         password: new UntypedFormControl(null),
     });
 
-  public login = (form: any) => {
+  public login = (form: UntypedFormGroup) => {
     const credentials = JSON.stringify(form.value);
 
-    this.http.post(this.url + "login", credentials, {
+    this.http.post(`${this.url}/login`, credentials, {
       responseType: "json",
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
     }).subscribe(response => {
         if (response && response.hasOwnProperty("result")){
-            const token = (response as any).result.token;
+            const token = (response as TokenResult).result.token;
             localStorage.setItem("jwt", token);
             this.invalidLogin = false;
             this.toastr.success("Logged In successfully");
@@ -46,14 +47,4 @@ export class LoginComponent {
 
     });
   }
-
-    isUserAuthenticated() {
-        const token = localStorage.getItem("jwt");
-        if (token && !this.jwtHelper.isTokenExpired(token)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 }
